@@ -6,7 +6,7 @@ function creerCompteur(){
             valeur++;
         },
         decrementer: function(){
-            valeur--;
+            valeur--;   
         },
         Valeur: function(){
             return valeur;
