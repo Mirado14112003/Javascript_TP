@@ -14,6 +14,19 @@ function creerCompteur(){
     };
 }
 
+function once(fn) {
+    let called = false; // variable privée qui mémorise si fn a été appelée
+    let result; //variable privée pour mémoriser le résultat du premier appel
+
+    return function (...args) { //retourne une nouvelle fonction
+        if (!called) { //si la fonction n'a jamais été appelé
+            called = true;
+            result = fn(...args);
+        }
+        return result;
+    };
+}
+
 //-fonction memoize
 function memoize(fn)
 {   //mémorise la fonction
@@ -30,3 +43,15 @@ function memoize(fn)
         }
     }
 }
+
+
+const counter = creerCompteur()
+counter.incrementer();  //0
+console.log(counter.Valeur());      //1
+counter.incrementer();  //1
+console.log(counter.Valeur());      //2
+
+once(counter.incrementer());
+console.log(once(counter.Valeur()));
+console.log(memoize(counter.incrementer()));
+
